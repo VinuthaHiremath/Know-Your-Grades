@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<vxml version="2.0" lang="en">
+<form id="home">
+<block>
+	<prompt> Welcome to know your grades voice application. Please have the student I.D ready for verification. </prompt>
+</block>
+
+	<field name="list_by">
+	
+		<prompt> Please tell what kind of grade listing you want. Term, gpa or course name. </prompt>	
+		<grammar type="application/x-nuance-gsl" mode="voice">
+		<![CDATA[
+		[
+			[term]    {<list_by "term">}
+			[gpa]  {<list_by "gpa">}
+			[course]  {<list_by "course name">}
+		]
+		]]>
+		</grammar>
+		
+		<noinput cond="true" count="1">
+			<prompt> Sorry. I did not hear you. </prompt>
+		</noinput>
+	
+		<noinput  cond="true" count="2">
+			<prompt> Sorry. I could not hear you again. Please say your name. </prompt>
+		</noinput>
+
+		<noinput  cond="true" count="3">
+			<prompt> I am sorry. There is no response. You are being transferred to the operator. </prompt>
+			<exit form="home"/>
+		</noinput>
+	
+		<nomatch count="1">
+			That option is not recognized. Please try again. 
+		</nomatch>
+        
+		<nomatch count="2">
+			I am sorry. I cannot recognize that option. Please try again. 
+		</nomatch>
+        
+		<nomatch count="3">
+			I am sorry. You have exceeded the maximum number of attempts. Your call is being transferred to the opertaor for assistance. Thank you.
+		<clear namelist="list_by"/> 
+		<exit form="home"/>
+		</nomatch>
+
+	<filled>
+		<prompt> You have selected <value expr="list_by"/>. </prompt>
+	</filled>
+
+	</field>
+
+	<field name="confirm_list_by" type="boolean">
+		<prompt> Please say YES to confirm otherwise say NO to try again </prompt>
+		<nomatch>
+			Sorry that is not valid. Please say only YES or NO. 
+		</nomatch>
+	
+		<noinput cond="true" count="1">
+			<prompt> Sorry. I did not hear you. </prompt>
+		</noinput>
+
+		<noinput  cond="true" count="2">
+			<prompt> Sorry. I did not hear you again. </prompt>
+		</noinput>
+
+		<noinput  cond="true" count="3">
+			<prompt> I am sorry. There is no response. You are being transferred to the operator. </prompt>
+			<exit form="home"/>
+		</noinput>
+	
+		<filled>
+		<if cond="confirm_list_by">
+			<goto next="grades_page.xml"/>
+			<exit form="home"/>
+		<else/>
+			<prompt> Alright. Lets try again. </prompt>
+			<clear namelist="confirm_list_by"/>
+			<goto nextitem="list_by"/>
+		</if>
+	</filled>
+	</field>
+	
+</form>
+</vxml>
