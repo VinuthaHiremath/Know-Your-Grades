@@ -6,10 +6,10 @@
 	<goto next="#home"/>
 </block>
 </form>
-
+<script type="text/javascript" src="system.js">
 <form id="home">
 	<field name="fld_student_name">	
-		<prompt> Please say the user name. </prompt>	
+		<prompt> Please say the user name.  </prompt>	
 		<grammar type="application/x-nuance-gsl" mode="voice">
 		<![CDATA[
 		[

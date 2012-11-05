@@ -72,7 +72,7 @@
   
 	<filled namelist="course">		
 			<prompt> 
-				You have scored an A grade in <value expr="course"/>.
+				You have scored an A grade in <value expr="course"/> in the term fall.
 			</prompt>				
 	</filled>
 	</field>
@@ -137,7 +137,10 @@
 		
 		<filled namelist="term">		
 			<prompt> 
-				You have scored an A grade in the term <value expr="term"/>.
+				For the term <value expr="term"/>, you have the following courses and grades.
+					Spoken Language Interface. A.
+					Programming Languages. B-.
+					Software Engineering. C+.
 			</prompt>				
 		</filled>
 	</field>
@@ -163,7 +166,12 @@
 
 <form id="gpa_report">
 <block>
-	<prompt>Your GPA for the entire degree is 3.47 out of 4. This a very good G P A. Congratulations. </prompt>
+	<prompt>
+		Your G P A for fall is 3.45.
+		Yor G P A for winter is 3.49.
+		Your G P A for spring is 3.47.
+		Your G P A for the entire degree is 3.47 out of 4. This a very good G P A. Congratulations.
+	</prompt>
 </block>
 	<field name = "confirm_exit">
 	<prompt>Do you wish to know your grades for other terms or courses. Please say yes to continue and no to exit the application. </prompt> 
