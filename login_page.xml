@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <vxml version="2.0" lang="en">
-<form id="home">
+<form id="intro">
 <block>
-	<prompt> Welcome to know your grades voice application. Please have the student I.D ready for verification. </prompt>
+	<prompt> Welcome to know your grades voice application. Please have the student I D ready for veri fication. </prompt>
+	<goto next="#home"/>
 </block>
+</form>
 
-	<field name="student_name">
-	
+<form id="home">
+	<field name="fld_student_name">	
 		<prompt> Please say the user name. </prompt>	
 		<grammar type="application/x-nuance-gsl" mode="voice">
 		<![CDATA[
 		[
-			[kirin]    {<student_name "bob kirin and student ID is  8 3 0 6">}
-			[whitney]  {<student_name "roger whitney and student ID is  9 2 3 4">}
-			[rudolph]  {<student_name "wilma rudolph and student ID is  8 1 2 1">}
-			[langdon] {<student_name "robert langdon and student ID is  6 2 3 4">}
+			[kirin]   {<fld_student_name "bob kirin">}
+			[whitney] {<fld_student_name "roger whitney">}
+			[rudolph] {<fld_student_name "wilma rudolph">}
+			[langdon] {<fld_student_name "robert langdon">}
 		]
 		]]>
 		</grammar>
 		
 		<noinput cond="true" count="1">
 			<prompt> Sorry. I did not hear you. </prompt>
-		</noinput>
-	
+		</noinput>	
 		<noinput  cond="true" count="2">
 			<prompt> Sorry. I could not hear you again. Please say your name. </prompt>
 		</noinput>
-
 		<noinput  cond="true" count="3">
 			<prompt> I am sorry. There is no response. You are being transferred to the operator. </prompt>
 			<exit form="home"/>
@@ -34,51 +34,70 @@
 	
 		<nomatch count="1">
 			This student does not exist in our records. Please try again. 
-		</nomatch>
-        
+		</nomatch>        
 		<nomatch count="2">
 			I am sorry. I cannot find the student in our records. Please try again. 
-		</nomatch>
-        
+		</nomatch>        
 		<nomatch count="3">
 			I am sorry. You have exceeded the maximum number of attempts. Your call is being transferred to the opertaor for assistance. Thank you.
-		<clear namelist="student_name"/> 
+		<clear namelist="fld_student_name"/> 
 		<exit form="home"/>
 		</nomatch>
 
-	<filled>
-		<prompt> The student is  <value expr="student_name"/>. </prompt>
-	</filled>
+		<filled>
+			<prompt> The student is  <value expr="fld_student_name"/>. </prompt>
+		</filled>
 
 	</field>
 
-	<field name="confirm_name" type="boolean">
-		<prompt> Please say YES to confirm otherwise say NO to try again </prompt>
-		<nomatch>
-			Sorry that is not valid. Please say only YES or NO. 
-		</nomatch>
-	
+	<field name="fld_student_id">
+		<prompt> Now, please read out the student id. </prompt>	
+		<grammar type="application/x-nuance-gsl" mode="voice">
+		<![CDATA[
+		[
+			[1 2 3 4]  {<fld_student_id is  1 2 3 4">}
+			[2 3 4 1]  {<fld_student_id is  2 3 4 1">}
+			[3 4 1 2]  {<fld_student_id is  3 4 1 2">}
+			[4 1 2 3]  {<fld_student_id is  4 1 2 3">}
+		]
+		]]>
+		</grammar>
+		
 		<noinput cond="true" count="1">
 			<prompt> Sorry. I did not hear you. </prompt>
-		</noinput>
-
+		</noinput>	
 		<noinput  cond="true" count="2">
-			<prompt> Sorry. I did not hear you again. </prompt>
+			<prompt> Sorry. I could not hear you again. Please say your password. </prompt>
 		</noinput>
-
 		<noinput  cond="true" count="3">
 			<prompt> I am sorry. There is no response. You are being transferred to the operator. </prompt>
+			<clear namelist="fld_student_name"/> 
 			<exit form="home"/>
 		</noinput>
 	
+		<nomatch count="1">
+			<prompt>This student i d does not match the user name. Please try again. </prompt>
+		</nomatch>        
+		<nomatch count="2">
+			<prompt> I am sorry. The student i d  does not match the user name in our records. Can you please try again. </prompt>
+		</nomatch>        
+		<nomatch count="3">
+			<prompt>I am sorry. You have exceeded the maximum number of attempts. 
+			Your call is being transferred to the opertaor for assistance. Thank you.</prompt>
+		<clear namelist="fld_student_name"/> 
+		<clear namelist="fld_student_id"/> 
+		<exit form="home"/>
+		</nomatch>
+	
 		<filled>
-		<if cond="confirm_name">
+		<if cond="fld_student_id">
 			<goto next="grades_page.xml"/>
 			<exit form="home"/>
 		<else/>
 			<prompt> Alright. Lets try again. </prompt>
-			<clear namelist="confirm_name"/>
-			<goto nextitem="student_name"/>
+			<clear namelist="fld_student_name"/>
+			<clear namelist="fld_student_id"/>
+			<goto nextitem="fld_student_name"/>
 		</if>
 	</filled>
 	</field>
