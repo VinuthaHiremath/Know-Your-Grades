@@ -1,11 +1,9 @@
-	<grammar version = "1.0"
-	type = "application/srgs+xml"
-	root = "initial id"
-	mode = "voice">
+<?xml version="1.0" encoding="ISO-8859-1"?>
+	<grammar version="1.0" type="application/srgs+xml" root="initial_id" mode="voice">
 
-	<rule id = "initial id" />
+	<rule id="initial_id" />
 
-	<rule id = "course_names" scope = "public">
+	<rule id="course_names" scope="public">
 		<one-of>
 		<item>Spoken Language Interface</item>
 		<item>Programming Languages</item>
@@ -16,7 +14,7 @@
 		</one-of>
 	</rule>
 	
-	<rule id = "course_ids" scope = "public">
+	<rule id="course_ids" scope="public">
 		<one-of>
 		<item>C S five ten</item>
 		<item>C S five hundred and ten</item>
@@ -29,7 +27,7 @@
 		</one-of>
 	</rule>
 	
-	<rule id = "year" scope = "public">
+	<rule id="year" scope="public">
 		<one-of>
 		<item>Two thousand and twelve</item>
 		<item>Two thousand twelve</item>
@@ -43,7 +41,7 @@
 		</one-of>
 	</rule>
 	
-	<rule id = "term_numbers">
+	<rule id="term_numbers" scope="public">
 	<one-of>
 		<item> first </item>
 		<item> second </item>
@@ -54,7 +52,7 @@
 	</one-of>
 	</rule>
 
-	<rule id = "term_seasons">
+	<rule id="term_seasons" scope="public">
 		<one-of>
 		<item> spring </item>
 		<item> summer </item>
